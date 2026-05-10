@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dev-Log</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="hero">
+      <h1 class="title">Dev-Log</h1>
+      <p class="subtitle">Tu bitácora de aprendizaje — guarda conceptos y avances.</p>
+    </header>
+
+    <section class="composer">
+      <form id="entryForm" class="composer__form" aria-label="Crear nueva entrada">
+        <label for="entryText" class="visually-hidden">Nueva entrada</label>
+        <textarea id="entryText" rows="6" placeholder="Escribe un concepto, un aprendizaje o un avance..." required></textarea>
+        <div class="composer__actions">
+          <div class="counter">Entradas: <span id="entryCount">0</span></div>
+          <button type="submit" class="btn-primary">Guardar entrada</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="entries">
+      <h2 class="entries__title">Entradas recientes</h2>
+      <div id="entriesGrid" class="entries__grid" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <script src="script.js" type="module"></script>
+</body>
+</html>
