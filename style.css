@@ -1,20 +1,16 @@
 :root {
-  /* Colores y tokens base (he integrado y extendido lo existente) */
-  --bg: #0f172a; /* fondo noche */
-  --glass: rgba(255, 255, 255, 0.04);
-  --glass-strong: rgba(255, 255, 255, 0.06);
-  --accent1: #7c3aed; /* morado */
-  --accent2: #06b6d4; /* celeste */
-  --accent3: #60a5fa; /* soporte para gradiente hero */
-  --card-border: rgba(255, 255, 255, 0.04);
-  --glass-blur: 10px;
+  /* Minimalist tokens: tonos neutros y acento suave */
+  --bg: #091025; /* fondo noche muy oscuro */
+  --surface: rgba(255,255,255,0.03);
+  --muted: rgba(255,255,255,0.06);
+  --accent: #82eafd; /* acento tenue */
+  --accent-weak: #7c3aed; /* secundario para pequeños detalles */
+  --card-border: rgba(255,255,255,0.025);
+  --glass-blur: 6px;
 
-  /* Sombras y elevación para mejorar profundidad */
-  --shadow-elev-1: 0 8px 20px rgba(2, 6, 23, 0.45);
-  --shadow-elev-2: 0 18px 40px rgba(2, 6, 23, 0.55);
-
-  /* Glow para el botón primario */
-  --btn-glow: rgba(124, 58, 237, 0.12);
+  /* Sombras más sutiles, minimalistas */
+  --shadow-soft: 0 6px 16px rgba(2,6,23,0.35);
+  --shadow-strong: 0 10px 30px rgba(2,6,23,0.45);
 }
 
 *{box-sizing:border-box}
@@ -22,11 +18,11 @@ html,body{height:100%}
 body{
   margin:0;
   font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  background: radial-gradient(1200px 600px at 10% 10%, rgba(12,30,75,0.35), transparent), var(--bg);
-  color:#e6eef8;
+  background: var(--bg);
+  color: rgba(230,238,248,0.96);
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
-  padding:48px 20px;
+  padding:56px 20px; /* más espacio alrededor para sensación minimalista */
 }
 
 .app{max-width:980px;margin:0 auto}
@@ -34,65 +30,72 @@ body{
 /* Hero: gradiente mejorado y sutil text-shadow para más profundidad */
 .hero{display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:28px}
 .title{
-  font-size:3rem;margin:0;
-  /* Gradiente del hero mejorado */
-  background: linear-gradient(90deg, var(--accent1) 0%, var(--accent3) 50%, var(--accent2) 100%);
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-  /* sutil text-shadow para legibilidad y profundidad */
-  text-shadow: 0 6px 18px rgba(12, 20, 40, 0.45);
+  font-size:2.4rem;
+  margin:0 0 6px 0;
+  /* Hero más simple: color sólido con toque de acento en subrayado */
+  color: rgba(240,248,255,0.98);
+  font-weight:600;
 }
-.subtitle{margin:8px 0 0;color:rgba(230,238,248,0.75)}
+.title::after{
+  /* Sutil línea de acento debajo del título */
+  content:'';display:block;height:3px;width:68px;margin:10px auto 0;background:linear-gradient(90deg,var(--accent),var(--accent-weak));border-radius:3px;opacity:0.95
+}
+.subtitle{margin:8px 0 0;color:rgba(230,238,248,0.66);font-size:0.95rem}
 
-.composer{margin:18px 0 28px}
+.composer{margin:22px 0 32px}
 
-/* Composer: más espacio interior, borde más sutil y mejor sombra */
+/* Composer: estilo plano, menos ruido visual */
 .composer__form{
-  background:var(--glass);
-  border:1px solid rgba(255,255,255,0.035); /* borde más sutil */
+  background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+  border:1px solid var(--card-border);
   backdrop-filter: blur(var(--glass-blur));
-  padding:20px; /* más espacio interno */
-  border-radius:14px;
-  box-shadow:var(--shadow-elev-1);
+  padding:22px;
+  border-radius:10px;
+  box-shadow: var(--shadow-soft);
 }
 .composer__form textarea{
   width:100%;
-  background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  background:transparent; /* mantener superficie limpia */
   border:1px solid rgba(255,255,255,0.02);
-  color:inherit;padding:16px;border-radius:12px;resize:vertical;font-size:1rem;min-height:120px;
-  transition:box-shadow .18s ease, border-color .18s ease; /* mejora interacción */
+  color:inherit;padding:14px;border-radius:8px;resize:vertical;font-size:1rem;min-height:120px;
+  transition:box-shadow .18s ease, border-color .18s ease;
 }
 .composer__actions{display:flex;align-items:center;justify-content:space-between;margin-top:12px}
 .counter{opacity:0.9;font-size:0.95rem}
 
 /* Botón: glow sutil y transición más suave */
 .btn-primary{
-  background:linear-gradient(90deg,var(--accent2),var(--accent1));
-  color:white;padding:10px 16px;border-radius:10px;border:0;cursor:pointer;font-weight:600;
-  box-shadow: var(--shadow-elev-1), 0 0 18px var(--btn-glow); /* sutil glow por defecto */
-  transition: transform .22s cubic-bezier(.2,.9,.3,1), box-shadow .22s cubic-bezier(.2,.9,.3,1);
+  background: transparent; /* limpio y minimalista */
+  color: var(--accent);
+  padding:10px 14px;border-radius:8px;border:1px solid rgba(130,234,253,0.08);cursor:pointer;font-weight:600;
+  box-shadow: var(--shadow-soft);
+  transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease, color .18s ease;
 }
 .btn-primary:hover{
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-elev-2), 0 0 30px rgba(124,58,237,0.18), 0 0 40px rgba(6,182,212,0.12);
+  transform: translateY(-3px);
+  background: rgba(130,234,253,0.03);
+  box-shadow: var(--shadow-strong);
 }
 
 .entries__title{margin:18px 0 12px;color:rgba(230,238,248,0.9)}
-.entries__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px} /* más espacio entre cards */
+.entries__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px} /* más espacio y columnas ligeramente mayores */
 
 /* Cards: sombras mejoradas, padding y transiciones suaves */
+
+/* Cards: minimalistas con sombra suave y bordes limpios */
 .card{
-  position:relative;padding:18px;border-radius:14px;
-  background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  position:relative;padding:18px;border-radius:12px;
+  background: rgba(255,255,255,0.012);
   border:1px solid var(--card-border);
-  box-shadow: var(--shadow-elev-1), inset 0 1px 0 rgba(255,255,255,0.02);
+  box-shadow: var(--shadow-soft);
   overflow:hidden;transform-origin:center center;opacity:1;
-  transition: transform .22s cubic-bezier(.2,.9,.3,1), box-shadow .22s cubic-bezier(.2,.9,.3,1), border-color .18s ease;
+  transition: transform .18s ease, box-shadow .18s ease, border-color .12s ease;
 }
-.card__meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
-.card:hover{transform: translateY(-6px);box-shadow: var(--shadow-elev-2), 0 6px 30px rgba(6,182,212,0.03);border-color: rgba(255,255,255,0.06)}
-.badge{background:linear-gradient(90deg,var(--accent1),var(--accent2));padding:6px 10px;border-radius:999px;font-size:0.8rem;font-weight:600}
-.card__date{font-size:0.82rem;opacity:0.75}
-.card__text{white-space:pre-wrap;color:rgba(230,238,248,0.95);line-height:1.4}
+.card__meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.card:hover{transform: translateY(-4px);box-shadow: var(--shadow-strong);border-color: rgba(255,255,255,0.045)}
+.badge{background:transparent;color:var(--accent);padding:4px 8px;border-radius:999px;font-size:0.78rem;font-weight:700;border:1px solid rgba(130,234,253,0.06)}
+.card__date{font-size:0.8rem;opacity:0.6}
+.card__text{white-space:pre-wrap;color:rgba(230,238,248,0.94);line-height:1.5;font-size:0.98rem}
 
 /* simple popIn animation */
 .popIn{animation:popIn .34s cubic-bezier(.2,.9,.3,1) both}
