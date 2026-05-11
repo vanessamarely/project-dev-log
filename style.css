@@ -3,8 +3,8 @@
   --bg: #0f172a; /* fondo noche */
   --glass: rgba(255, 255, 255, 0.04);
   --glass-strong: rgba(255, 255, 255, 0.06);
-  --accent1: #7c3aed; /* morado */
-  --accent2: #06b6d4; /* celeste */
+  --accent1: #8b5cf6; /* morado - variante (intencional para conflicto) */
+  --accent2: #14b8a6; /* celeste - variante (intencional para conflicto) */
   --accent3: #60a5fa; /* soporte para gradiente hero */
   --card-border: rgba(255, 255, 255, 0.04);
   --glass-blur: 10px;
@@ -81,7 +81,8 @@ body{
 .btn-primary{
   background:linear-gradient(90deg,var(--accent2),var(--accent1));
   color:white;padding:10px 16px;border-radius:10px;border:0;cursor:pointer;font-weight:600;
-  box-shadow: var(--shadow-elev-1), 0 0 18px var(--btn-glow); /* sutil glow por defecto */
+  /* Sombra alterada intencionalmente para forzar conflicto al mezclar ramas */
+  box-shadow: 0 10px 28px rgba(2,6,23,0.55), 0 0 22px rgba(139,92,246,0.10);
   transition: transform .22s cubic-bezier(.2,.9,.3,1), box-shadow .22s cubic-bezier(.2,.9,.3,1);
 }
 .btn-primary:hover{
