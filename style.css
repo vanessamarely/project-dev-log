@@ -1,197 +1,108 @@
 :root {
+  /* Colores y tokens base (he integrado y extendido lo existente) */
   --bg: #0f172a; /* fondo noche */
   --glass: rgba(255, 255, 255, 0.04);
   --glass-strong: rgba(255, 255, 255, 0.06);
   --accent1: #7c3aed; /* morado */
   --accent2: #06b6d4; /* celeste */
-  --card-border: rgba(255, 255, 255, 0.06);
-  --glass-blur: 8px;
+  --accent3: #60a5fa; /* soporte para gradiente hero */
+  --card-border: rgba(255, 255, 255, 0.04);
+  --glass-blur: 10px;
+
+  /* Sombras y elevación para mejorar profundidad */
+  --shadow-elev-1: 0 8px 20px rgba(2, 6, 23, 0.45);
+  --shadow-elev-2: 0 18px 40px rgba(2, 6, 23, 0.55);
+
+  /* Glow para el botón primario */
+  --btn-glow: rgba(124, 58, 237, 0.12);
 }
 
-* {
-  box-sizing: border-box;
-}
-html,
-body {
-  height: 100%;
-}
-body {
-  margin: 0;
-  font-family:
-    Inter,
-    system-ui,
-    -apple-system,
-    "Segoe UI",
-    Roboto,
-    "Helvetica Neue",
-    Arial;
-  background:
-    radial-gradient(
-      1200px 600px at 10% 10%,
-      rgba(12, 30, 75, 0.35),
-      transparent
-    ),
-    var(--bg);
-  color: #e6eef8;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  padding: 48px 20px;
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: radial-gradient(1200px 600px at 10% 10%, rgba(12,30,75,0.35), transparent), var(--bg);
+  color:#e6eef8;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  padding:48px 20px;
 }
 
-.app {
-  max-width: 980px;
-  margin: 0 auto;
-}
+.app{max-width:980px;margin:0 auto}
 
-.hero {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  margin-bottom: 28px;
+/* Hero: gradiente mejorado y sutil text-shadow para más profundidad */
+.hero{display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:28px}
+.title{
+  font-size:3rem;margin:0;
+  /* Gradiente del hero mejorado */
+  background: linear-gradient(90deg, var(--accent1) 0%, var(--accent3) 50%, var(--accent2) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  /* sutil text-shadow para legibilidad y profundidad */
+  text-shadow: 0 6px 18px rgba(12, 20, 40, 0.45);
 }
-.title {
-  font-size: 3rem;
-  margin: 0;
-  background: linear-gradient(90deg, var(--accent1), var(--accent2));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-.subtitle {
-  margin: 8px 0 0;
-  color: rgba(230, 238, 248, 0.75);
-}
+.subtitle{margin:8px 0 0;color:rgba(230,238,248,0.75)}
 
-.composer {
-  margin: 18px 0 28px;
-}
-.composer__form {
-  background: var(--glass);
-  border: 1px solid var(--glass-strong);
+.composer{margin:18px 0 28px}
+
+/* Composer: más espacio interior, borde más sutil y mejor sombra */
+.composer__form{
+  background:var(--glass);
+  border:1px solid rgba(255,255,255,0.035); /* borde más sutil */
   backdrop-filter: blur(var(--glass-blur));
-  padding: 18px;
-  border-radius: 12px;
-  box-shadow: 0 6px 18px rgba(2, 6, 23, 0.5);
+  padding:20px; /* más espacio interno */
+  border-radius:14px;
+  box-shadow:var(--shadow-elev-1);
 }
-.composer__form textarea {
-  width: 100%;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.02),
-    rgba(255, 255, 255, 0.01)
-  );
-  border: 1px solid rgba(255, 255, 255, 0.03);
-  color: inherit;
-  padding: 14px;
-  border-radius: 10px;
-  resize: vertical;
-  font-size: 1rem;
-  min-height: 120px;
+.composer__form textarea{
+  width:100%;
+  background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border:1px solid rgba(255,255,255,0.02);
+  color:inherit;padding:16px;border-radius:12px;resize:vertical;font-size:1rem;min-height:120px;
+  transition:box-shadow .18s ease, border-color .18s ease; /* mejora interacción */
 }
-.composer__actions {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 12px;
+.composer__actions{display:flex;align-items:center;justify-content:space-between;margin-top:12px}
+.counter{opacity:0.9;font-size:0.95rem}
+
+/* Botón: glow sutil y transición más suave */
+.btn-primary{
+  background:linear-gradient(90deg,var(--accent2),var(--accent1));
+  color:white;padding:10px 16px;border-radius:10px;border:0;cursor:pointer;font-weight:600;
+  box-shadow: var(--shadow-elev-1), 0 0 18px var(--btn-glow); /* sutil glow por defecto */
+  transition: transform .22s cubic-bezier(.2,.9,.3,1), box-shadow .22s cubic-bezier(.2,.9,.3,1);
 }
-.counter {
-  opacity: 0.9;
-  font-size: 0.95rem;
+.btn-primary:hover{
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-elev-2), 0 0 30px rgba(124,58,237,0.18), 0 0 40px rgba(6,182,212,0.12);
 }
 
-.btn-primary {
-  background: linear-gradient(90deg, var(--accent2), var(--accent1));
-  color: white;
-  padding: 10px 16px;
-  border-radius: 10px;
-  border: 0;
-  cursor: pointer;
-  font-weight: 600;
-  box-shadow: 0 8px 20px rgba(12, 20, 40, 0.45);
-  transition:
-    transform 0.18s ease,
-    box-shadow 0.18s ease;
-}
-.btn-primary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 14px 30px rgba(12, 20, 40, 0.6);
-}
+.entries__title{margin:18px 0 12px;color:rgba(230,238,248,0.9)}
+.entries__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px} /* más espacio entre cards */
 
-.entries__title {
-  margin: 18px 0 12px;
-  color: rgba(230, 238, 248, 0.9);
+/* Cards: sombras mejoradas, padding y transiciones suaves */
+.card{
+  position:relative;padding:18px;border-radius:14px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border:1px solid var(--card-border);
+  box-shadow: var(--shadow-elev-1), inset 0 1px 0 rgba(255,255,255,0.02);
+  overflow:hidden;transform-origin:center center;opacity:1;
+  transition: transform .22s cubic-bezier(.2,.9,.3,1), box-shadow .22s cubic-bezier(.2,.9,.3,1), border-color .18s ease;
 }
-.entries__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 12px;
-}
-
-.card {
-  position: relative;
-  padding: 14px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--card-border);
-  box-shadow: 0 6px 18px rgba(2, 6, 23, 0.45);
-  overflow: hidden;
-  transform-origin: center center;
-  opacity: 1;
-}
-.card__meta {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 8px;
-}
-.badge {
-  background: linear-gradient(90deg, var(--accent1), var(--accent2));
-  padding: 6px 10px;
-  border-radius: 999px;
-  font-size: 0.8rem;
-  font-weight: 600;
-}
-.card__date {
-  font-size: 0.82rem;
-  opacity: 0.75;
-}
-.card__text {
-  white-space: pre-wrap;
-  color: rgba(230, 238, 248, 0.95);
-  line-height: 1.4;
-}
+.card__meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.card:hover{transform: translateY(-6px);box-shadow: var(--shadow-elev-2), 0 6px 30px rgba(6,182,212,0.03);border-color: rgba(255,255,255,0.06)}
+.badge{background:linear-gradient(90deg,var(--accent1),var(--accent2));padding:6px 10px;border-radius:999px;font-size:0.8rem;font-weight:600}
+.card__date{font-size:0.82rem;opacity:0.75}
+.card__text{white-space:pre-wrap;color:rgba(230,238,248,0.95);line-height:1.4}
 
 /* simple popIn animation */
-.popIn {
-  animation: popIn 0.34s cubic-bezier(0.2, 0.9, 0.3, 1) both;
-}
-@keyframes popIn {
-  from {
-    transform: translateY(8px) scale(0.98);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0) scale(1);
-    opacity: 1;
-  }
-}
+.popIn{animation:popIn .34s cubic-bezier(.2,.9,.3,1) both}
+@keyframes popIn{from{transform:translateY(8px) scale(.98);opacity:0}to{transform:translateY(0) scale(1);opacity:1}}
 
 /* small utility */
-.visually-hidden {
-  position: absolute !important;
-  height: 1px;
-  width: 1px;
-  overflow: hidden;
-  clip: rect(1px, 1px, 1px, 1px);
-  white-space: nowrap;
+.visually-hidden{position:absolute !important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap}
+
+@media (max-width:520px){
+  .title{font-size:2rem}
+  body{padding:28px 14px}
 }
 
-@media (max-width: 520px) {
-  .title {
-    font-size: 2rem;
-  }
-  body {
-    padding: 28px 14px;
-  }
-}
