@@ -9,36 +9,56 @@
 <body>
   <main class="app">
     <header class="hero">
-      <h1 class="title">Manual</h1>
-      <p class="subtitle">Tu bitácora de aprendizaje — guarda conceptos y avances.</p>
+      <h1 class="title">Dev-Log</h1>
+      <p class="subtitle">Documenta tu viaje en el código</p>
     </header>
 
     <section class="composer">
       <form id="entryForm" class="composer__form" aria-label="Crear nueva entrada">
+        <div class="composer__header">
+          <h3 class="composer__title">Nueva Entrada <span class="composer__icon" aria-hidden>✍️</span></h3>
+        </div>
+
         <label for="entryText" class="visually-hidden">Nueva entrada</label>
         <textarea id="entryText" rows="6" placeholder="Escribe un concepto, un aprendizaje o un avance..." required></textarea>
 
-        <!-- Select para categoría (nueva funcionalidad) -->
-        <label for="entryCategory" class="visually-hidden">Categoría</label>
-        <select id="entryCategory" aria-label="Categoría de la entrada">
-          <option value="aprendizaje">Aprendizaje</option>
-          <option value="git">Git</option>
-          <option value="javascript">JavaScript</option>
-          <option value="ui">UI</option>
-          <option value="fix">Error solucionado</option>
-        </select>
+        <div class="composer__toolbar">
+          <div class="composer__left-icons" aria-hidden>
+            <span class="composer__icon-small">&lt;&gt;</span>
+            <span class="composer__icon-small">🖼️</span>
+          </div>
 
-        <div class="composer__actions">
-          <div class="counter">Entradas: <span id="entryCount">0</span></div>
-          <button type="submit" class="btn-primary">Guardar entrada</button>
+          <div class="composer__right-actions">
+            <label for="entryCategory" class="visually-hidden">Categoría</label>
+            <select id="entryCategory" aria-label="Categoría de la entrada">
+              <option value="aprendizaje">APRENDIZAJE</option>
+              <option value="git">GIT</option>
+              <option value="javascript">JAVASCRIPT</option>
+              <option value="uiux">UI/UX</option>
+              <option value="error">ERROR</option>
+            </select>
+            <button type="submit" class="btn--primary">Guardar Entrada ➤</button>
+          </div>
+        </div>
+
+        <div class="composer__meta">
+          <div class="counter">Entradas: <strong id="entryCount">0</strong></div>
         </div>
       </form>
     </section>
 
     <section class="entries">
-      <h2 class="entries__title">Entradas recientes</h2>
-      <div id="entriesGrid" class="entries__grid" aria-live="polite"></div>
+      <header class="entries__header">
+        <div class="entries__header-left"><span class="entries__header-icon" aria-hidden>🗂️</span><h2 class="entries__title">Entradas Recientes</h2></div>
+        <a href="#" class="entries__viewall">Ver todas</a>
+      </header>
+
+      <div id="entriesGrid" class="entries__grid" aria-live="polite">
+        <div id="emptyMessage" class="empty">Aún no hay entradas — crea la primera.</div>
+      </div>
     </section>
+
+    <button id="fab" class="fab" aria-label="Nueva entrada">+</button>
   </main>
 
   <script src="script.js" type="module"></script>
