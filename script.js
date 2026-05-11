@@ -1,6 +1,7 @@
 // script.js — lógica principal para crear y mostrar tarjetas
 const entryForm = document.getElementById('entryForm');
 const entryText = document.getElementById('entryText');
+const entryCategory = document.getElementById('entryCategory');
 const entriesGrid = document.getElementById('entriesGrid');
 const entryCountEl = document.getElementById('entryCount');
 
@@ -13,12 +14,12 @@ const formatDate = (d = new Date()) => {
 };
 
 // Crea el elemento HTML para una card y la inserta en el grid
-const createCard = (text, dateStr, prepend = true) => {
+const createCard = (text, dateStr, categoryValue = 'aprendizaje', categoryLabel = 'Aprendizaje', prepend = true) => {
   const el = document.createElement('article');
   el.className = 'card popIn';
   el.innerHTML = `
     <div class="card__meta">
-      <span class="badge">Aprendizaje</span>
+      <span class="badge badge--${categoryValue}">${escapeHtml(categoryLabel)}</span>
       <time class="card__date">${dateStr}</time>
     </div>
     <div class="card__text">${escapeHtml(text)}</div>
@@ -50,17 +51,21 @@ entryForm.addEventListener('submit', (e) => {
   if (!text) return;
 
   const dateStr = formatDate();
-  entries.unshift({ text, date: new Date() });
-  createCard(text, dateStr, true);
+  const categoryValue = entryCategory ? entryCategory.value : 'aprendizaje';
+  const categoryLabel = entryCategory ? entryCategory.options[entryCategory.selectedIndex].text : 'Aprendizaje';
+
+  entries.unshift({ text, date: new Date(), category: categoryValue });
+  createCard(text, dateStr, categoryValue, categoryLabel, true);
   updateCount();
   entryText.value = ''; // limpiar textarea
+  if (entryCategory) entryCategory.selectedIndex = 0; // reiniciar select
   entryText.focus();
 });
 
 // Insertar una tarjeta de ejemplo al cargar la página
 document.addEventListener('DOMContentLoaded', () => {
   const exampleText = 'Ejemplo: Aprendí a usar variables de entorno y a organizar mi bitácora en pequeñas fichas.';
-  entries.push({ text: exampleText, date: new Date() });
-  createCard(exampleText, formatDate(entries[0].date), true);
+  entries.push({ text: exampleText, date: new Date(), category: 'aprendizaje' });
+  createCard(exampleText, formatDate(entries[0].date), 'aprendizaje', 'Aprendizaje', true);
   updateCount();
 });
